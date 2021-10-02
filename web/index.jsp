@@ -11,9 +11,44 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Index</title>
+        
+        <style>
+            .index {
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
+            
+            .tabela-index tr:hover {
+                background-color: aqua;
+            }
+        </style>
+        
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="index">
+            
+            <%if (usuario==null) {
+                    
+                } else {%>
+            
+                    <h3>Lista de usuários</h3>
+
+                    <table class="tabela-index" border="1px" cellPadding="5px">
+                        <tr>
+                            <td>Cód</td>
+                            <td>Nome</td>
+                        </tr>
+
+                        <% for(int i = 0; i < usuarioLogado.size(); i++){%>
+                            <tr>
+                                <td><%=i%></td>
+                                <td><%=usuarioLogado.get(i)%></td>
+                            </tr>
+                        <%}%>
+                    </table>
+                <%}%>
+        </div>
     </body>
 </html>
