@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<%@ page pageEncoding="UTF-8" %>
+
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.ArrayList"%>
+
+<%
+
+    //Adiciona um novo elemento no Arrray "usuarioLogado"
+    ArrayList <String> usuarioLogado = new ArrayList<>();
+    
+    //verifica se há usuarios no Array "listaUsuarios"
+    if (application.getAttribute("on_list")==null) {
+            ArrayList <String> listaUsuarios = new ArrayList<>();
+            application.setAttribute("on_list", listaUsuarios);
+        }
+    
+    if (request.getParameter("login")!=null) {
+            String user = request.getParameter("user");
+            session.setAttribute("user", user);
+            
+            ArrayList <String> listaUsuarios = (ArrayList) application.getAttribute("on_list");
+            listaUsuarios.add(user);
+            
+            //Verifica se o Array está vazio, se verdadeiro, ele cria os 6 numeros da megaSena 
+            if (session.getAttribute("numbers")==null) {
+                    ArrayList <Integer> nums = new ArrayList<>();
+                    
+                    for(int i=0; i<=60; i++){
+                        nums.add(i);
+                    }
+                    
+                    Collections.shuffle(nums);
+                    ArrayList <Integer> megaSena = new ArrayList<>();
+                    
+                    for(int i=0; i < 6; i++) {
+                        megaSena.add(nums.get(i));
+                    }
+                    
+                    session.setAttribute("numbers", megaSena);
+                }
+    } else if (request.getParameter("logout")!=null) {
+        ArrayList <String> listaUsuarios = (ArrayList) application.getAttribute("on_list");
+        
+        for(int i=0; i < listaUsuarios.size(); i++) {
+            if(listaUsuarios.get(i).equals(session.getAttribute("user"))) {
+                listaUsuarios.remove(i);
+                session.setAttribute("on_list", listaUsuarios);
+            }
+        }
+        
+        session.removeAttribute("user");
+        
+    }
+    
+    //Pega os nomes do usuarios logados e colocar na lista
+    ArrayList <String> listaUsuarios = (ArrayList) application.getAttribute("on_list");
+    
+    for(String i: listaUsuarios) {
+        if (!usuarioLogado.contains(i)) {
+                usuarioLogado.add(i);
+            }
+    }
+    
+    ArrayList <Integer> megaSena = (ArrayList<Integer>) session.getAttribute("numbers");
+    
+    String usuario = (String) session.getAttribute("user");
+
+
+%> 
+
+<style>
+    div.header {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        width: fit-content;
+        display: flex;
+        background-color: greenyellow;
+    }
+    
+    .tabela-header th:hover {
+        background-color: seagreen;
+    }
+</style>
+
+<body class="body-index">
+    <div class="header">
+        <form method="post">
+            <table class="tabela-header" border="1px" cellpadding="5px">
+                <tr class="tr">
+                    <th><h1>Prova POO 2021</h1></th>
+                    <th><h1><a href=<%=request.getContextPath()%>"/index.jsp">Index</a></h1></th>
+                    <th><h1><a href=<%=request.getContextPath()%>"/andriw.jsp">Me conheça</a></h1></th>
+                    <th><h1><a href=<%=request.getContextPath()%>"/andriw-dica-megasena.jsp">Dica MegaSena</a></h1></th>
+                    
+                    <th><h1>
+                            <%if (usuario==null) { %>
+                                <input type="text" name="user" class="login" required>
+                                <input type="submit" name="login" class="login" value="Entrar">
+
+                            <%} else { %>
+                                Login: <%=usuario%>
+                                <input type="submit" name="logout" value="Sair">
+                            
+                            <%}%>
+                    </h1></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
