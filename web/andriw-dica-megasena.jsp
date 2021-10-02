@@ -4,14 +4,42 @@
     Author     : andriw
 --%>
 
+<%@include file='WEB-INF/jpsf/header.jspf'%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+        <title>Dica MegaSena</title>
+        
+        <style>
+            .dica {
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
+            
+            .tabela-dica td:hover {
+                background-color: aqua;
+            }
+        </style>
     <body>
-        <h1>Hello World!</h1>
+        <div class="dica">
+
+           <%if (usuario==null) {
+
+           } else {%>
+                <h3>Os números sorteados são: </h3>
+                
+                <table class="tabela-dica" border="1px" cellPadding="5px">
+                    <tr>
+                        <%for(int i=0; i<6; i++){%>
+                            <td><%=megaSena.get(i)%></td>
+                            
+                        <%}%>
+                    </tr>
+                </table>
+           <%}%>
+        </div>
     </body>
 </html>
