@@ -90,9 +90,9 @@
             <table class="tabela-header" border="1px" cellpadding="5px">
                 <tr class="tr">
                     <th><h1>Prova POO 2021</h1></th>
-                    <th><h1><a href=<%=request.getContextPath()%>"/index.jsp">Index</a></h1></th>
-                    <th><h1><a href=<%=request.getContextPath()%>"/andriw.jsp">Me conheça</a></h1></th>
-                    <th><h1><a href=<%=request.getContextPath()%>"/andriw-dica-megasena.jsp">Dica MegaSena</a></h1></th>
+                    <th><h1><a href="<%=request.getContextPath()%>/index.jsp">Index</a></h1></th>
+                    <th><h1><a href="<%=request.getContextPath()%>/andriw.jsp">Me conheça</a></h1></th>
+                    <th><h1><a href="<%=request.getContextPath()%>/andriw-dica-megasena.jsp">Dica MegaSena</a></h1></th>
                     
                     <th><h1>
                             <%if (usuario==null) { %>

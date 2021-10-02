@@ -31,24 +31,24 @@
             
             <%if (usuario==null) {
                     
-                } else {%>
-            
-                    <h3>Lista de usuários</h3>
+            } else {%>
 
-                    <table class="tabela-index" border="1px" cellPadding="5px">
+                <h3>Lista de usuários</h3>
+
+                <table class="tabela-index" border="1px" cellPadding="5px">
+                    <tr>
+                        <td>Cód</td>
+                        <td>Nome</td>
+                    </tr>
+
+                    <% for(int i = 0; i < usuarioLogado.size(); i++){%>
                         <tr>
-                            <td>Cód</td>
-                            <td>Nome</td>
+                            <td><%=i%></td>
+                            <td><%=usuarioLogado.get(i)%></td>
                         </tr>
-
-                        <% for(int i = 0; i < usuarioLogado.size(); i++){%>
-                            <tr>
-                                <td><%=i%></td>
-                                <td><%=usuarioLogado.get(i)%></td>
-                            </tr>
-                        <%}%>
-                    </table>
-                <%}%>
+                    <%}%>
+                </table>
+            <%}%>
         </div>
     </body>
 </html>
